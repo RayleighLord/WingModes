@@ -15,11 +15,11 @@ a slower mode.
 
 | Measurement | Desktop 1440 × 900 | Mobile viewport 390 × 844 | Acceptance |
 | --- | ---: | ---: | ---: |
-| Worst mean frame interval | 16.671 ms | 16.670 ms | ≤ 20 ms |
-| Worst per-mode frame p95 | 17.0 ms | 17.0 ms | ≤ 33.4 ms |
-| Largest individual frame interval | 24.3 ms | 18.5 ms | ≤ 100 ms |
-| Mode-switch p95 | 17.0 ms | 16.9 ms | ≤ 100 ms |
-| First ready, local server | 489 ms | 513 ms | Recorded |
+| Worst mean frame interval | 16.671 ms | 16.669 ms | ≤ 20 ms |
+| Worst per-mode frame p95 | 17.0 ms | 17.1 ms | ≤ 33.4 ms |
+| Largest individual frame interval | 20.5 ms | 28.6 ms | ≤ 100 ms |
+| Mode-switch p95 | 16.8 ms | 16.9 ms | ≤ 100 ms |
+| First ready, local server | 386 ms | 586 ms | Recorded |
 
 Every performance gate passed. Both cases retained 3 geometries, 1 texture and
 3 shader programs across repeated mode changes, with zero browser errors.

@@ -4,6 +4,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { animationCycleSeconds } from "../math/timing";
 import type { WingDataset } from "../types";
 import { createBerlinTexture } from "./berlin";
+import { motionScale } from "./display.json";
 import { createViewEnvelope, fitViewEnvelope } from "./camera";
 
 const TWO_PI = 2 * Math.PI;
@@ -129,7 +130,7 @@ export class WingRenderer {
     const mode = this.data.manifest.modes[this.mode - 1]!;
     (this.displacement.array as Float32Array).set(this.data.displacements.subarray((this.mode - 1) * count, this.mode * count));
     this.displacement.needsUpdate = true;
-    this.uniforms.uAmplitude.value = mode.displayAmplitudeM;
+    this.uniforms.uAmplitude.value = mode.displayAmplitudeM * motionScale;
     this.uniforms.uColorMax.value = mode.colorMax;
     this.uniforms.uComponent.value.set(mode.colorComponent === 0 ? 1 : 0, mode.colorComponent === 1 ? 1 : 0, mode.colorComponent === 2 ? 1 : 0);
     this.phase = 0;
@@ -140,7 +141,7 @@ export class WingRenderer {
     this.host.dataset.frequencyHz = `${mode.frequencyHz}`;
     this.host.dataset.colorComponent = `${mode.colorComponent}`;
     this.host.dataset.cycleSeconds = `${animationCycleSeconds(this.data.manifest.modes, this.mode)}`;
-    this.host.dataset.amplitude = `${mode.displayAmplitudeM}`;
+    this.host.dataset.amplitude = `${mode.displayAmplitudeM * motionScale}`;
     this.requestFrame();
   }
 
@@ -323,7 +324,7 @@ const FRAGMENT_SHADER = /* glsl */ `
     float cell = fract(gridCoordinate);
     float distance = min(cell, 1.0 - cell);
     float pixel = max(fwidth(gridCoordinate), 0.00001);
-    return 1.0 - smoothstep(0.25 * pixel, 0.9 * pixel, distance);
+    return 1.0 - smoothstep(0.12 * pixel, 0.52 * pixel, distance);
   }
   void main() {
     float paletteCoordinate = clamp(vDisplacement * 0.5 + 0.5, 0.0, 1.0);
@@ -334,7 +335,7 @@ const FRAGMENT_SHADER = /* glsl */ `
     color *= 0.88 + 0.12 * diffuse;
     float grid = max(surfaceGrid(vUv.x, 16.0), surfaceGrid(vUv.y, 32.0));
     vec3 gridColor = sRGBTransferEOTF(vec4(0.72, 0.78, 0.85, 1.0)).rgb;
-    color = mix(color, gridColor, grid * 0.28);
+    color = mix(color, gridColor, grid * 0.22);
     gl_FragColor = vec4(color, 1.0);
     #include <colorspace_fragment>
   }

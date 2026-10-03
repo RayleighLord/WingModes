@@ -1,9 +1,13 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
+import display from "../src/wing/display.json" with { type: "json" };
+
+const { motionScale } = display;
 
 const directory = new URL("../public/data/", import.meta.url);
 const manifest = JSON.parse(await readFile(new URL("wing.json", directory), "utf8"));
+assert.ok(Number.isFinite(motionScale) && motionScale > 0);
 assert.equal(manifest.schemaVersion, 1);
 assert.equal(manifest.modeCount, 24);
 assert.equal(manifest.modes.length, 24);
@@ -29,12 +33,24 @@ for (const [name, length] of Object.entries({
   arrays[name] = name === "triangles" ? new Uint32Array(buffer) : new Float32Array(buffer);
   assert.ok(arrays[name].every(Number.isFinite), `${name}: non-finite data`);
 }
-const { positions, triangles, displacements } = arrays;
+const { positions, triangles, displacements, uvs } = arrays;
 assert.ok(triangles.every(index => index < n));
 assert.ok(Array.isArray(manifest.rootVertices) && manifest.rootVertices.length > 0);
 for (const vertex of manifest.rootVertices) {
   assert.ok(Number.isSafeInteger(vertex) && vertex >= 0 && vertex < n);
 }
+
+// Equal material coordinates identify the two skins (and interior tip-cap
+// vertices). Their extreme heights must remain ordered through the full cycle.
+const skinPairs = new Map();
+for (let vertex = 0; vertex < n; vertex += 1) {
+  const key = `${uvs[vertex * 2]},${uvs[vertex * 2 + 1]}`;
+  const pair = skinPairs.get(key) ?? [vertex, vertex];
+  if (positions[vertex * 3 + 2] > positions[pair[0] * 3 + 2]) pair[0] = vertex;
+  if (positions[vertex * 3 + 2] < positions[pair[1] * 3 + 2]) pair[1] = vertex;
+  skinPairs.set(key, pair);
+}
+let minimumSkinGapRatio = 1;
 
 function normal(a, b, c, offset, factor) {
   const ab = [0, 1, 2].map(k => positions[3 * b + k] - positions[3 * a + k]
@@ -66,17 +82,35 @@ for (let mode = 0; mode < 24; mode += 1) {
   for (const vertex of manifest.rootVertices) {
     for (let k = 0; k < 3; k += 1) assert.equal(displacements[offset + vertex * 3 + k], 0);
   }
+  for (const [upper, lower] of skinPairs.values()) {
+    if (upper === lower) continue;
+    const gap = positions[upper * 3 + 2] - positions[lower * 3 + 2];
+    const relativeMotion = Math.abs(displacements[offset + upper * 3 + 2] - displacements[offset + lower * 3 + 2]);
+    const minimumGap = gap - metadata.displayAmplitudeM * motionScale * relativeMotion;
+    assert.ok(minimumGap > 0, `Mode ${mode + 1}: upper/lower skins cross at ${motionScale}x display motion`);
+    minimumSkinGapRatio = Math.min(minimumSkinGapRatio, minimumGap / gap);
+  }
   for (let triangle = 0; triangle < t; triangle += 1) {
     const [a, b, c] = triangles.subarray(3 * triangle, 3 * triangle + 3);
     const rest = normal(a, b, c, offset, 0);
     const restArea = rest.reduce((sum, value) => sum + value * value, 0);
     assert.ok(restArea > 0, `Degenerate triangle ${triangle}`);
-    for (const phase of [-1, -0.5, 0.5, 1]) {
-      const deformed = normal(a, b, c, offset, phase * metadata.displayAmplitudeM);
-      const orientation = deformed.reduce((sum, value, k) => sum + value * rest[k], 0);
-      assert.ok(Number.isFinite(orientation) && orientation > 0,
-        `Mode ${mode + 1}: flipped triangle ${triangle}`);
+    const amplitude = metadata.displayAmplitudeM * motionScale;
+    const positive = normal(a, b, c, offset, amplitude);
+    const negative = normal(a, b, c, offset, -amplitude);
+    const high = positive.reduce((sum, value, k) => sum + value * rest[k], 0);
+    const low = negative.reduce((sum, value, k) => sum + value * rest[k], 0);
+    // Signed area is quadratic in the oscillation factor. Check its exact
+    // minimum over [-1, 1], including any interior minimum, for every triangle.
+    const linear = (high - low) / 2;
+    const quadratic = (high + low) / 2 - restArea;
+    const stationary = quadratic > 0 ? -linear / (2 * quadratic) : Infinity;
+    let minimum = Math.min(low, high);
+    if (Math.abs(stationary) < 1) {
+      minimum = Math.min(minimum, restArea + stationary * (linear + stationary * quadratic));
     }
+    assert.ok(Number.isFinite(minimum) && minimum > 0,
+      `Mode ${mode + 1}: flipped triangle ${triangle} at ${motionScale}x display motion`);
   }
 }
-console.log(`Verified ${n} vertices, ${t} triangles and all 24 modal assets: checksums, frequencies, normalization, fixed root and deformation geometry.`);
+console.log(`Verified ${n} vertices, ${t} triangles and all 24 modal assets: checksums, frequencies, normalization, fixed root and continuous-cycle geometry at ${motionScale}x display motion. Minimum upper/lower skin gap ratio: ${minimumSkinGapRatio.toFixed(6)}.`);

@@ -92,8 +92,6 @@ export function startApp(): void {
     const mode = data.manifest.modes[state.mode - 1]!;
     const frequency = mode.frequencyHz.toFixed(mode.frequencyHz < 10 ? 3 : 2);
     const component = COMPONENTS[mode.colorComponent];
-    element("frequency-value").innerHTML = `${frequency} <span>Hz</span>`;
-    element("color-component").textContent = `${component} displacement`;
     slider.setAttribute("aria-valuetext", `Mode ${state.mode} of 24, ${frequency} hertz`);
     element("wing-description").textContent = `Aircraft-wing mode ${state.mode}, natural frequency ${frequency} hertz. ` +
       `The Berlin blue-to-coral palette shows signed ${component.toLowerCase()} displacement. ` +

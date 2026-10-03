@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { describe, expect, it } from "vitest";
 import type { WingDataset, WingManifest } from "../types";
 import { createViewEnvelope, fitViewEnvelope } from "../wing/camera";
+import { motionScale } from "../wing/display.json";
 
 describe("camera framing of three-dimensional modal motion", () => {
   it("keeps every oscillation phase inside the desktop and mobile viewport", () => {
@@ -34,7 +35,7 @@ describe("camera framing of three-dimensional modal motion", () => {
         for (let vertex = 0; vertex < 3; vertex += 1) {
           const point = new THREE.Vector3().fromArray(positions, vertex * 3);
           const displacement = new THREE.Vector3().fromArray(displacements, (mode.index - 1) * positions.length + vertex * 3);
-          point.addScaledVector(displacement, mode.displayAmplitudeM * Math.cos(phase * Math.PI / 16));
+          point.addScaledVector(displacement, mode.displayAmplitudeM * motionScale * Math.cos(phase * Math.PI / 16));
           point.project(camera);
           expect(Math.abs(point.x)).toBeLessThan(width! <= 800 ? 0.9 : 0.72);
           expect(Math.abs(point.y)).toBeLessThan(0.65);

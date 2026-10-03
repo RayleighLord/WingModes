@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import type { WingDataset } from "../types";
+import { motionScale } from "./display.json";
 
 /** Cache the actual surface and its complete modal envelope in the default view. */
 export function createViewEnvelope(data: WingDataset, center: THREE.Vector3, direction: THREE.Vector3): Float32Array {
@@ -17,9 +18,10 @@ export function createViewEnvelope(data: WingDataset, center: THREE.Vector3, dir
     }
     for (const mode of data.manifest.modes) {
       const modalOffset = (mode.index - 1) * data.positions.length + offset;
-      const ux = data.displacements[modalOffset]! * mode.displayAmplitudeM;
-      const uy = data.displacements[modalOffset + 1]! * mode.displayAmplitudeM;
-      const uz = data.displacements[modalOffset + 2]! * mode.displayAmplitudeM;
+      const amplitude = mode.displayAmplitudeM * motionScale;
+      const ux = data.displacements[modalOffset]! * amplitude;
+      const uy = data.displacements[modalOffset + 1]! * amplitude;
+      const uz = data.displacements[modalOffset + 2]! * amplitude;
       for (const [component, axis] of axes.entries()) {
         const index = vertex * 6 + 3 + component;
         envelope[index] = Math.max(envelope[index]!, Math.abs(ux * axis.x + uy * axis.y + uz * axis.z));

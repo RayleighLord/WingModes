@@ -12,7 +12,7 @@ The published 24 modes come from 121,584 shell elements, 118,500 nodes and 711,0
 | Relative matrix symmetry error | 5.740e-17 | ≤ 1e-12 |
 | Factor-two drilling frequency sensitivity | 0.0071% | ≤ 1% |
 | Independent plate benchmark error | 1.4660% | < 2% |
-| Maximum display amplitude times gradient norm | 0.249000 | ≤ 0.25 |
+| Maximum stored amplitude times gradient norm | 0.249000 | ≤ 0.25 |
 
 The convergence comparison interpolates coarse modes onto the fine shell mesh and uses its full consistent mass matrix. Nearly repeated modes are checked as subspaces. The export audit uses the actual float32 buffers and verifies positive triangle orientation at five phases; the gradient bound covers the entire oscillation.
 

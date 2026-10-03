@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-03T08:37:03.143Z",
+  "generatedAt": "2026-10-03T08:50:40.218Z",
   "launchArgs": [
     "--use-gl=angle",
     "--use-angle=gl"
@@ -12,7 +12,7 @@
         "width": 1440,
         "height": 900
       },
-      "firstReadyMs": 489.47876900000006,
+      "firstReadyMs": 386.11929499999997,
       "hardware": {
         "vendor": "Google Inc. (NVIDIA Corporation)",
         "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4090/PCIe/SSE2, OpenGL 4.5.0)",
@@ -27,226 +27,226 @@
       "modes": [
         {
           "mode": 1,
-          "count": 120,
-          "meanMs": 16.667500000000775,
-          "p95Ms": 16.899999999906868,
-          "maxMs": 21.09999999962747,
+          "count": 121,
+          "meanMs": 16.659504132229866,
+          "p95Ms": 16.90000000037253,
+          "maxMs": 17.299999999813735,
           "cycleSeconds": 10,
-          "meanFramesPerCycle": 599.9700014998971
+          "meanFramesPerCycle": 600.2579620994701
         },
         {
           "mode": 2,
           "count": 120,
-          "meanMs": 16.666666666666668,
-          "p95Ms": 16.899999999906868,
-          "maxMs": 17.199999999720603,
+          "meanMs": 16.670000000003103,
+          "p95Ms": 16.90000000037253,
+          "maxMs": 17.100000000093132,
           "cycleSeconds": 2.7273714498173853,
-          "meanFramesPerCycle": 163.6422869890431
+          "meanFramesPerCycle": 163.60956507599747
         },
         {
           "mode": 3,
-          "count": 121,
-          "meanMs": 16.664462809920433,
-          "p95Ms": 17,
-          "maxMs": 17.199999999720603,
+          "count": 120,
+          "meanMs": 16.667500000000775,
+          "p95Ms": 16.90000000037253,
+          "maxMs": 18.100000000093132,
           "cycleSeconds": 1.801385864090546,
-          "meanFramesPerCycle": 108.09744572253312
+          "meanFramesPerCycle": 108.07774795802983
         },
         {
           "mode": 4,
           "count": 121,
-          "meanMs": 16.665289256198346,
-          "p95Ms": 16.899999999906868,
-          "maxMs": 17,
+          "meanMs": 16.664462809916586,
+          "p95Ms": 17,
+          "maxMs": 17.399999999906868,
           "cycleSeconds": 1.7830500963422042,
-          "meanFramesPerCycle": 106.99184808202664
+          "meanFramesPerCycle": 106.99715416455895
         },
         {
           "mode": 5,
-          "count": 120,
-          "meanMs": 16.669999999999224,
+          "count": 121,
+          "meanMs": 16.66280991735691,
           "p95Ms": 16.899999999906868,
           "maxMs": 17,
           "cycleSeconds": 1.7351691884021874,
-          "meanFramesPerCycle": 104.0893334374486
+          "meanFramesPerCycle": 104.13424848558937
         },
         {
           "mode": 6,
           "count": 121,
-          "meanMs": 16.660330578511626,
+          "meanMs": 16.663636363634826,
           "p95Ms": 16.899999999906868,
-          "maxMs": 17.09999999962747,
+          "maxMs": 17,
           "cycleSeconds": 1.6814893726101963,
-          "meanFramesPerCycle": 100.92773157688535
+          "meanFramesPerCycle": 100.90770921284161
         },
         {
           "mode": 7,
           "count": 120,
-          "meanMs": 16.668333333334886,
+          "meanMs": 16.667500000000775,
           "p95Ms": 16.899999999906868,
-          "maxMs": 17,
+          "maxMs": 17.100000000093132,
           "cycleSeconds": 1.637021015317563,
-          "meanFramesPerCycle": 98.21143977506713
+          "meanFramesPerCycle": 98.21635010154414
         },
         {
           "mode": 8,
-          "count": 121,
-          "meanMs": 16.664462809916586,
+          "count": 120,
+          "meanMs": 16.667500000000775,
           "p95Ms": 16.899999999906868,
-          "maxMs": 17.09999999962747,
+          "maxMs": 17,
           "cycleSeconds": 1.6329228029382064,
-          "meanFramesPerCycle": 97.98832531022222
+          "meanFramesPerCycle": 97.97046965280519
         },
         {
           "mode": 9,
-          "count": 120,
-          "meanMs": 16.666666666666668,
-          "p95Ms": 16.800000000279397,
-          "maxMs": 19.600000000093132,
+          "count": 121,
+          "meanMs": 16.665289256198346,
+          "p95Ms": 16.899999999906868,
+          "maxMs": 17,
           "cycleSeconds": 1.6016229975738419,
-          "meanFramesPerCycle": 96.0973798544305
+          "meanFramesPerCycle": 96.10532244306218
         },
         {
           "mode": 10,
           "count": 120,
-          "meanMs": 16.666666666666668,
-          "p95Ms": 17,
-          "maxMs": 20.700000000186265,
+          "meanMs": 16.668333333334886,
+          "p95Ms": 16.899999999906868,
+          "maxMs": 17.100000000093132,
           "cycleSeconds": 1.5761633558240349,
-          "meanFramesPerCycle": 94.56980134944209
+          "meanFramesPerCycle": 94.5603453149018
         },
         {
           "mode": 11,
           "count": 121,
-          "meanMs": 16.663636363638673,
-          "p95Ms": 16.90000000037253,
-          "maxMs": 17.899999999906868,
+          "meanMs": 16.663636363634826,
+          "p95Ms": 16.899999999906868,
+          "maxMs": 17.199999999720603,
           "cycleSeconds": 1.5629827592588927,
-          "meanFramesPerCycle": 93.7960193772255
+          "meanFramesPerCycle": 93.79601937724716
         },
         {
           "mode": 12,
           "count": 120,
-          "meanMs": 16.667500000000775,
-          "p95Ms": 17,
-          "maxMs": 23.199999999720603,
+          "meanMs": 16.669166666668996,
+          "p95Ms": 16.800000000279397,
+          "maxMs": 17.100000000093132,
           "cycleSeconds": 1.5543355686211504,
-          "meanFramesPerCycle": 93.25547134369751
+          "meanFramesPerCycle": 93.24614719517672
         },
         {
           "mode": 13,
           "count": 121,
-          "meanMs": 16.66611570248011,
+          "meanMs": 16.665289256198346,
           "p95Ms": 16.899999999906868,
           "maxMs": 17.100000000093132,
           "cycleSeconds": 1.497365342761001,
-          "meanFramesPerCycle": 89.84489064468548
+          "meanFramesPerCycle": 89.84934613145604
         },
         {
           "mode": 14,
           "count": 120,
           "meanMs": 16.667500000000775,
-          "p95Ms": 16.899999999906868,
-          "maxMs": 17,
+          "p95Ms": 16.90000000037253,
+          "maxMs": 20.5,
           "cycleSeconds": 1.4941706840677822,
           "meanFramesPerCycle": 89.64575875612496
         },
         {
           "mode": 15,
           "count": 121,
-          "meanMs": 16.664462809916586,
-          "p95Ms": 16.899999999906868,
-          "maxMs": 17.200000000186265,
+          "meanMs": 16.663636363634826,
+          "p95Ms": 16.800000000279397,
+          "maxMs": 17,
           "cycleSeconds": 1.4858495550184103,
-          "meanFramesPerCycle": 89.16276341858557
+          "meanFramesPerCycle": 89.16718551666132
         },
         {
           "mode": 16,
           "count": 121,
-          "meanMs": 16.66611570247626,
+          "meanMs": 16.66611570248011,
           "p95Ms": 16.800000000279397,
-          "maxMs": 16.899999999906868,
+          "maxMs": 17.100000000093132,
           "cycleSeconds": 1.4397205727676177,
-          "meanFramesPerCycle": 86.38609010458886
+          "meanFramesPerCycle": 86.38609010456892
         },
         {
           "mode": 17,
-          "count": 120,
-          "meanMs": 16.670833333333334,
-          "p95Ms": 16.799999999813735,
+          "count": 121,
+          "meanMs": 16.663636363634826,
+          "p95Ms": 16.899999999906868,
           "maxMs": 17,
           "cycleSeconds": 1.425385045382513,
-          "meanFramesPerCycle": 85.50172729112799
+          "meanFramesPerCycle": 85.53865520572334
         },
         {
           "mode": 18,
           "count": 121,
           "meanMs": 16.66611570248011,
-          "p95Ms": 17,
-          "maxMs": 19.200000000186265,
+          "p95Ms": 16.899999999906868,
+          "maxMs": 16.90000000037253,
           "cycleSeconds": 1.4110681222784487,
           "meanFramesPerCycle": 84.66688624203333
         },
         {
           "mode": 19,
-          "count": 121,
-          "meanMs": 16.663636363634826,
+          "count": 120,
+          "meanMs": 16.666666666666668,
           "p95Ms": 16.899999999906868,
-          "maxMs": 17.200000000186265,
+          "maxMs": 17.100000000093132,
           "cycleSeconds": 1.39727302501506,
-          "meanFramesPerCycle": 83.85162725132068
+          "meanFramesPerCycle": 83.8363815009036
         },
         {
           "mode": 20,
           "count": 121,
-          "meanMs": 16.665289256198346,
+          "meanMs": 16.663636363638673,
           "p95Ms": 16.90000000037253,
-          "maxMs": 22,
+          "maxMs": 17.100000000093132,
           "cycleSeconds": 1.3662197060063421,
-          "meanFramesPerCycle": 81.97995756348496
+          "meanFramesPerCycle": 81.98808928569385
         },
         {
           "mode": 21,
-          "count": 121,
-          "meanMs": 16.665289256198346,
-          "p95Ms": 16.899999999906868,
-          "maxMs": 24.300000000279397,
+          "count": 120,
+          "meanMs": 16.669166666665113,
+          "p95Ms": 16.800000000279397,
+          "maxMs": 17,
           "cycleSeconds": 1.338545285719513,
-          "meanFramesPerCycle": 80.31935510640272
+          "meanFramesPerCycle": 80.30067204237191
         },
         {
           "mode": 22,
           "count": 121,
-          "meanMs": 16.66611570248011,
-          "p95Ms": 16.800000000279397,
-          "maxMs": 17,
+          "meanMs": 16.66280991735691,
+          "p95Ms": 16.899999999906868,
+          "maxMs": 17.200000000186265,
           "cycleSeconds": 1.33541305216339,
-          "meanFramesPerCycle": 80.12743197052599
+          "meanFramesPerCycle": 80.1433286934606
         },
         {
           "mode": 23,
           "count": 120,
-          "meanMs": 16.667500000000775,
-          "p95Ms": 16.899999999906868,
-          "maxMs": 16.90000000037253,
+          "meanMs": 16.670833333333334,
+          "p95Ms": 16.90000000037253,
+          "maxMs": 17.100000000093132,
           "cycleSeconds": 1.2963444477036181,
-          "meanFramesPerCycle": 77.7767780233123
+          "meanFramesPerCycle": 77.76122655557818
         },
         {
           "mode": 24,
           "count": 121,
           "meanMs": 16.665289256198346,
           "p95Ms": 16.899999999906868,
-          "maxMs": 17,
+          "maxMs": 17.100000000093132,
           "cycleSeconds": 1.2778871283267752,
           "meanFramesPerCycle": 76.67956485372666
         }
       ],
       "switching": {
         "count": 72,
-        "meanMs": 16.666666666666668,
-        "p95Ms": 17,
-        "maxMs": 17.5
+        "meanMs": 16.66388888889277,
+        "p95Ms": 16.800000000279397,
+        "maxMs": 16.90000000037253
       },
       "baselineResources": {
         "geometries": 3,
@@ -266,7 +266,7 @@
         "width": 390,
         "height": 844
       },
-      "firstReadyMs": 513.4880329999942,
+      "firstReadyMs": 586.1086060000016,
       "hardware": {
         "vendor": "Google Inc. (NVIDIA Corporation)",
         "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4090/PCIe/SSE2, OpenGL 4.5.0)",
@@ -282,11 +282,11 @@
         {
           "mode": 1,
           "count": 121,
-          "meanMs": 16.66280991735691,
-          "p95Ms": 17,
-          "maxMs": 18.5,
+          "meanMs": 16.663636363634826,
+          "p95Ms": 16.90000000037253,
+          "maxMs": 17.5,
           "cycleSeconds": 10,
-          "meanFramesPerCycle": 600.1388751115406
+          "meanFramesPerCycle": 600.109110747464
         },
         {
           "mode": 2,
@@ -299,206 +299,206 @@
         },
         {
           "mode": 3,
-          "count": 120,
-          "meanMs": 16.666666666666668,
-          "p95Ms": 16.90000000037253,
-          "maxMs": 17.100000000093132,
+          "count": 121,
+          "meanMs": 16.66611570248011,
+          "p95Ms": 17.09999999962747,
+          "maxMs": 22.299999999813735,
           "cycleSeconds": 1.801385864090546,
-          "meanFramesPerCycle": 108.08315184543275
+          "meanFramesPerCycle": 108.08672496030248
         },
         {
           "mode": 4,
           "count": 121,
-          "meanMs": 16.66611570248011,
-          "p95Ms": 16.899999999906868,
-          "maxMs": 17.09999999962747,
+          "meanMs": 16.665289256198346,
+          "p95Ms": 16.800000000279397,
+          "maxMs": 17,
           "cycleSeconds": 1.7830500963422042,
-          "meanFramesPerCycle": 106.98654252573476
+          "meanFramesPerCycle": 106.99184808202664
         },
         {
           "mode": 5,
-          "count": 120,
-          "meanMs": 16.666666666666668,
+          "count": 121,
+          "meanMs": 16.66776859503978,
           "p95Ms": 16.899999999906868,
           "maxMs": 17,
           "cycleSeconds": 1.7351691884021874,
-          "meanFramesPerCycle": 104.11015130413124
+          "meanFramesPerCycle": 104.10326844341733
         },
         {
           "mode": 6,
           "count": 121,
-          "meanMs": 16.664462809916586,
+          "meanMs": 16.66280991735691,
           "p95Ms": 16.800000000279397,
-          "maxMs": 17,
+          "maxMs": 17.09999999962747,
           "cycleSeconds": 1.6814893726101963,
-          "meanFramesPerCycle": 100.90270486304462
+          "meanFramesPerCycle": 100.91271405902935
         },
         {
           "mode": 7,
           "count": 120,
-          "meanMs": 16.667500000000775,
+          "meanMs": 16.668333333334886,
           "p95Ms": 16.899999999906868,
           "maxMs": 17.100000000093132,
           "cycleSeconds": 1.637021015317563,
-          "meanFramesPerCycle": 98.21635010154414
+          "meanFramesPerCycle": 98.21143977506713
         },
         {
           "mode": 8,
-          "count": 120,
-          "meanMs": 16.666666666666668,
-          "p95Ms": 16.899999999906868,
-          "maxMs": 17.09999999962747,
+          "count": 121,
+          "meanMs": 16.665289256198346,
+          "p95Ms": 16.90000000037253,
+          "maxMs": 26.699999999720603,
           "cycleSeconds": 1.6329228029382064,
-          "meanFramesPerCycle": 97.97536817629238
+          "meanFramesPerCycle": 97.98346598339846
         },
         {
           "mode": 9,
-          "count": 121,
-          "meanMs": 16.66611570247626,
-          "p95Ms": 16.899999999906868,
-          "maxMs": 17,
+          "count": 120,
+          "meanMs": 16.669166666665113,
+          "p95Ms": 17,
+          "maxMs": 17.09999999962747,
           "cycleSeconds": 1.6016229975738419,
-          "meanFramesPerCycle": 96.10055673235675
+          "meanFramesPerCycle": 96.08296740932806
         },
         {
           "mode": 10,
-          "count": 121,
-          "meanMs": 16.66611570247626,
-          "p95Ms": 16.800000000279397,
+          "count": 120,
+          "meanMs": 16.669166666668996,
+          "p95Ms": 16.899999999906868,
           "maxMs": 17,
           "cycleSeconds": 1.5761633558240349,
-          "meanFramesPerCycle": 94.57292772723567
+          "meanFramesPerCycle": 94.55561800672787
         },
         {
           "mode": 11,
           "count": 120,
-          "meanMs": 16.669999999999224,
+          "meanMs": 16.666666666666668,
           "p95Ms": 16.899999999906868,
-          "maxMs": 17.09999999962747,
+          "maxMs": 17.100000000093132,
           "cycleSeconds": 1.5629827592588927,
-          "meanFramesPerCycle": 93.76021351283536
+          "meanFramesPerCycle": 93.77896555553355
         },
         {
           "mode": 12,
-          "count": 121,
-          "meanMs": 16.662809917353062,
+          "count": 120,
+          "meanMs": 16.667500000000775,
           "p95Ms": 16.899999999906868,
-          "maxMs": 17,
+          "maxMs": 17.600000000093132,
           "cycleSeconds": 1.5543355686211504,
-          "meanFramesPerCycle": 93.28171996983696
+          "meanFramesPerCycle": 93.25547134369751
         },
         {
           "mode": 13,
-          "count": 121,
-          "meanMs": 16.665289256198346,
-          "p95Ms": 16.90000000037253,
-          "maxMs": 17,
+          "count": 120,
+          "meanMs": 16.666666666666668,
+          "p95Ms": 16.899999999906868,
+          "maxMs": 22.09999999962747,
           "cycleSeconds": 1.497365342761001,
-          "meanFramesPerCycle": 89.84934613145604
+          "meanFramesPerCycle": 89.84192056566005
         },
         {
           "mode": 14,
-          "count": 120,
-          "meanMs": 16.666666666666668,
-          "p95Ms": 17,
-          "maxMs": 17.100000000093132,
+          "count": 121,
+          "meanMs": 16.664462809916586,
+          "p95Ms": 16.90000000037253,
+          "maxMs": 17,
           "cycleSeconds": 1.4941706840677822,
-          "meanFramesPerCycle": 89.65024104406693
+          "meanFramesPerCycle": 89.66209718915394
         },
         {
           "mode": 15,
-          "count": 121,
-          "meanMs": 16.663636363638673,
-          "p95Ms": 16.800000000279397,
-          "maxMs": 17,
+          "count": 120,
+          "meanMs": 16.667500000000775,
+          "p95Ms": 16.90000000037253,
+          "maxMs": 24.399999999906868,
           "cycleSeconds": 1.4858495550184103,
-          "meanFramesPerCycle": 89.16718551664074
+          "meanFramesPerCycle": 89.14651597530171
         },
         {
           "mode": 16,
           "count": 120,
           "meanMs": 16.666666666666668,
-          "p95Ms": 16.800000000279397,
-          "maxMs": 17.700000000186265,
+          "p95Ms": 16.899999999906868,
+          "maxMs": 17,
           "cycleSeconds": 1.4397205727676177,
           "meanFramesPerCycle": 86.38323436605705
         },
         {
           "mode": 17,
-          "count": 121,
-          "meanMs": 16.664462809920433,
-          "p95Ms": 16.899999999906868,
-          "maxMs": 17,
+          "count": 120,
+          "meanMs": 16.668333333334886,
+          "p95Ms": 17,
+          "maxMs": 17.200000000186265,
           "cycleSeconds": 1.425385045382513,
-          "meanFramesPerCycle": 85.53441305854604
+          "meanFramesPerCycle": 85.51455126781603
         },
         {
           "mode": 18,
           "count": 121,
-          "meanMs": 16.66694214876187,
+          "meanMs": 16.665289256198346,
           "p95Ms": 16.899999999906868,
-          "maxMs": 17,
+          "maxMs": 28.600000000093132,
           "cycleSeconds": 1.4110681222784487,
-          "meanFramesPerCycle": 84.66268795342715
+          "meanFramesPerCycle": 84.67108494703314
         },
         {
           "mode": 19,
           "count": 121,
-          "meanMs": 16.664462809916586,
-          "p95Ms": 16.899999999906868,
-          "maxMs": 17,
+          "meanMs": 16.665289256198346,
+          "p95Ms": 17,
+          "maxMs": 17.200000000186265,
           "cycleSeconds": 1.39727302501506,
-          "meanFramesPerCycle": 83.8474687695051
+          "meanFramesPerCycle": 83.84331070013502
         },
         {
           "mode": 20,
           "count": 120,
-          "meanMs": 16.668333333334886,
+          "meanMs": 16.667500000000775,
           "p95Ms": 16.899999999906868,
-          "maxMs": 17,
+          "maxMs": 17.09999999962747,
           "cycleSeconds": 1.3662197060063421,
-          "meanFramesPerCycle": 81.96498586178672
+          "meanFramesPerCycle": 81.96908390618141
         },
         {
           "mode": 21,
-          "count": 121,
-          "meanMs": 16.66198347107515,
-          "p95Ms": 16.899999999906868,
-          "maxMs": 17,
+          "count": 120,
+          "meanMs": 16.666666666666668,
+          "p95Ms": 16.90000000037253,
+          "maxMs": 17.299999999813735,
           "cycleSeconds": 1.338545285719513,
-          "meanFramesPerCycle": 80.3352906959246
+          "meanFramesPerCycle": 80.31271714317077
         },
         {
           "mode": 22,
-          "count": 120,
-          "meanMs": 16.668333333334886,
+          "count": 121,
+          "meanMs": 16.664462809916586,
           "p95Ms": 16.899999999906868,
-          "maxMs": 17.399999999906868,
+          "maxMs": 17.09999999962747,
           "cycleSeconds": 1.33541305216339,
-          "meanFramesPerCycle": 80.11677145265067
+          "meanFramesPerCycle": 80.13537954363105
         },
         {
           "mode": 23,
-          "count": 121,
-          "meanMs": 16.660330578511626,
-          "p95Ms": 16.90000000037253,
-          "maxMs": 17.100000000093132,
-          "cycleSeconds": 1.2963444477036181,
-          "meanFramesPerCycle": 77.81024761751328
-        },
-        {
-          "mode": 24,
           "count": 120,
           "meanMs": 16.666666666666668,
           "p95Ms": 16.899999999906868,
+          "maxMs": 17,
+          "cycleSeconds": 1.2963444477036181,
+          "meanFramesPerCycle": 77.78066686221707
+        },
+        {
+          "mode": 24,
+          "count": 121,
+          "meanMs": 16.664462809916586,
+          "p95Ms": 16.899999999906868,
           "maxMs": 17.100000000093132,
           "cycleSeconds": 1.2778871283267752,
-          "meanFramesPerCycle": 76.6732276996065
+          "meanFramesPerCycle": 76.68336764905125
         }
       ],
       "switching": {
         "count": 72,
-        "meanMs": 16.66249999999612,
+        "meanMs": 16.666666666666668,
         "p95Ms": 16.899999999906868,
         "maxMs": 17.100000000093132
       },

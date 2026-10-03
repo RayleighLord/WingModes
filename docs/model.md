@@ -92,14 +92,18 @@ surface translations retain all three components and are separately normalized
 to a maximum vector magnitude of one, with a deterministic sign convention.
 Coordinates use chordwise x, spanwise y and vertical z.
 
-Each display amplitude targets 6% of semispan and is limited by the maximum
+Each stored display amplitude targets 6% of semispan and is limited by the maximum
 triangle displacement gradient to keep its norm at most 0.25. Float32 exported
 geometry is checked across the oscillation cycle for finite coordinates and
 positive triangle orientation. This exaggeration is not a physical response
-amplitude.
+amplitude. The viewer applies a further 1.2× magnification for clearer motion.
+Camera framing uses that same magnification, and `npm run check:assets` verifies
+positive triangle orientation and upper/lower skin separation over the entire
+oscillation cycle at the rendered amplitude. The computed eigenvectors and
+frequencies are unchanged.
 
 Berlin colors encode the signed model-coordinate component with the greatest
-area-weighted squared displacement. The label on screen identifies it; color
+area-weighted squared displacement. The accessible description identifies it; color
 normalization is independent of display exaggeration and camera orientation.
 
 One common slowdown preserves all frequency ratios. The fundamental takes at
