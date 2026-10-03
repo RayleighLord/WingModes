@@ -130,24 +130,43 @@ async function assertModesAndTiming(page) {
   for (const mode of [1, 24]) {
     await selectMode(page, mode);
     const cycle = Number(await page.locator("#wing-stage").getAttribute("data-cycle-seconds"));
-    const timing = await page.evaluate(async () => {
+    const samples = await page.evaluate(async () => {
       const stage = document.querySelector("#wing-stage");
       const toggle = document.querySelector("#animation-toggle");
+      const frames = [];
       toggle.click();
-      await new Promise(requestAnimationFrame);
-      const start = performance.now();
-      const initial = Number(stage.dataset.phase);
-      await new Promise((resolve) => setTimeout(resolve, 350));
-      const final = Number(stage.dataset.phase);
-      const seconds = (performance.now() - start) / 1000;
-      toggle.click();
-      return { initial, final, seconds };
+      try {
+        for (let sample = 0; sample < 9; sample += 1) {
+          if (sample === 4) {
+            // Exercise the long-frame guard even on a fast local GPU.
+            const stalledUntil = performance.now() + 250;
+            while (performance.now() < stalledUntil) { /* Simulate a busy CI frame. */ }
+          }
+          // Playback registers its callback first, so this observes the phase
+          // and timestamp of the same delivered frame, independent of GPU speed.
+          const time = await new Promise(requestAnimationFrame);
+          frames.push({ time, phase: Number(stage.dataset.phase), frame: Number(stage.dataset.frame) });
+        }
+        return frames;
+      } finally {
+        toggle.click();
+      }
     });
-    const expected = timing.seconds * 2 * Math.PI / cycle;
-    const actual = (timing.final - timing.initial + 2 * Math.PI) % (2 * Math.PI);
-    const circularError = Math.abs(Math.atan2(Math.sin(actual - expected), Math.cos(actual - expected)));
-    assert.ok(circularError < Math.max(0.12, 0.08 * 2 * Math.PI / cycle),
-      `Mode ${mode} animation phase does not follow its reported cycle`);
+    assert.ok(samples.some((sample, index) => index > 0 && sample.time - samples[index - 1].time > 100),
+      `Mode ${mode} timing check did not exercise a delayed frame`);
+    for (let index = 1; index < samples.length; index += 1) {
+      const previous = samples[index - 1];
+      const current = samples[index];
+      assert.ok(current.frame > previous.frame && current.time > previous.time,
+        `Mode ${mode} did not render the next animation frame`);
+      // Animation deliberately advances by at most 100 ms per delivered frame.
+      const elapsed = Math.min(0.1, (current.time - previous.time) / 1000);
+      const expected = elapsed * 2 * Math.PI / cycle;
+      const actual = current.phase - previous.phase;
+      const circularError = Math.abs(Math.atan2(Math.sin(actual - expected), Math.cos(actual - expected)));
+      assert.ok(circularError < 2e-6,
+        `Mode ${mode} phase differs from its reported cycle by ${circularError} radians after ${elapsed}s`);
+    }
   }
   await selectMode(page, 1);
 }
@@ -155,12 +174,11 @@ async function assertModesAndTiming(page) {
 async function assertPlayback(page) {
   await setPlaying(page, true);
   const phase = Number((await stageData(page)).phase);
-  await page.waitForTimeout(180);
-  assert.notEqual(Number((await stageData(page)).phase), phase);
+  await page.waitForFunction((previous) => Number(document.querySelector("#wing-stage").dataset.phase) !== previous, phase);
   await setPlaying(page, false);
-  await page.waitForTimeout(150);
+  await settleFrames(page);
   const paused = await stageData(page);
-  await page.waitForTimeout(180);
+  await settleFrames(page);
   const still = await stageData(page);
   assert.equal(still.phase, paused.phase, "Paused displacement moved");
   assert.equal(still.frame, paused.frame, "Paused renderer continues to schedule frames");
@@ -261,12 +279,12 @@ async function assertLifecycle(page) {
   const canvas = page.locator("#wing-stage canvas");
   await canvas.evaluate((element) => { element.dataset.lifecycleMarker = "original"; });
   await page.evaluate(() => window.dispatchEvent(new PageTransitionEvent("pagehide", { persisted: true })));
-  await page.waitForTimeout(100);
+  await settleFrames(page);
   const hidden = await stageData(page);
-  await page.waitForTimeout(150);
+  await settleFrames(page);
   assert.equal((await stageData(page)).frame, hidden.frame, "BFCache pagehide did not suspend rendering");
   await page.evaluate(() => window.dispatchEvent(new PageTransitionEvent("pageshow", { persisted: true })));
-  await page.waitForTimeout(100);
+  await page.waitForFunction((previous) => Number(document.querySelector("#wing-stage").dataset.frame) > previous, Number(hidden.frame));
   assert.equal(await canvas.getAttribute("data-lifecycle-marker"), "original");
   assert.equal(await canvas.count(), 1);
   assert.ok(Number((await stageData(page)).frame) > Number(hidden.frame));
@@ -277,15 +295,15 @@ async function assertLifecycle(page) {
     Object.defineProperty(document, "hidden", { configurable: true, value: true });
     document.dispatchEvent(new Event("visibilitychange"));
   });
-  await page.waitForTimeout(100);
+  await settleFrames(page);
   const suspended = await stageData(page);
-  await page.waitForTimeout(150);
+  await settleFrames(page);
   assert.equal((await stageData(page)).frame, suspended.frame, "Hidden document continued rendering");
   await page.evaluate(() => {
     delete document.hidden;
     document.dispatchEvent(new Event("visibilitychange"));
   });
-  await page.waitForTimeout(100);
+  await page.waitForFunction((previous) => Number(document.querySelector("#wing-stage").dataset.frame) > previous, Number(suspended.frame));
   assert.ok(Number((await stageData(page)).frame) > Number(suspended.frame));
   await setPlaying(page, false);
 }
@@ -319,7 +337,7 @@ async function assertContextRecovery(page) {
 async function assertResponsiveLayout(page) {
   for (const viewport of [{ width: 1024, height: 768 }, { width: 600, height: 800 }, { width: 390, height: 844 }, { width: 320, height: 568 }]) {
     await page.setViewportSize(viewport);
-    await page.waitForTimeout(120);
+    await settleFrames(page);
     const layout = await page.evaluate(() => {
       const canvas = document.querySelector("#wing-stage canvas");
       const bounds = canvas.getBoundingClientRect();
@@ -353,17 +371,17 @@ async function assertReducedMotion(browser) {
     await page.goto(baseUrl, { waitUntil: "networkidle" });
     await waitForWing(page, 1);
     assert.equal((await stageData(page)).playing, "false");
-    await page.waitForTimeout(150);
+    await settleFrames(page);
     const frame = (await stageData(page)).frame;
-    await page.waitForTimeout(150);
+    await settleFrames(page);
     assert.equal((await stageData(page)).frame, frame);
     await page.locator("#animation-toggle").tap();
     assert.equal((await stageData(page)).playing, "true", "Reduced motion must still allow explicit playback");
     await page.emulateMedia({ reducedMotion: "no-preference" });
     // Let the media-query change event reach the controller before changing it back.
-    await page.waitForTimeout(100);
+    await settleFrames(page);
     await page.emulateMedia({ reducedMotion: "reduce" });
-    await page.waitForTimeout(100);
+    await page.waitForFunction(() => document.querySelector("#wing-stage").dataset.playing === "false");
     assert.equal((await stageData(page)).playing, "false");
     await assertNoHoverMessages(page);
     assert.deepEqual(errors, []);
@@ -421,6 +439,11 @@ async function assertTargets(page) {
 async function selectMode(page, mode) {
   await page.locator("#mode-slider").fill(String(mode));
   await waitForWing(page, mode);
+  await settleFrames(page);
+}
+
+async function settleFrames(page) {
+  // Give pending rendering and browser events two actual frame opportunities.
   await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
 }
 
